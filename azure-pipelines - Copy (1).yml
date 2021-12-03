@@ -8,9 +8,7 @@ stages:
     displayName: Build Package
     jobs: 
     - job: BuildPackage
-      pool:
-        vmImage: windows-latest
-        
+      pool: LAPTOP-Q338O4FK
       steps:    
       - task: UiPathPack@2
         inputs:
