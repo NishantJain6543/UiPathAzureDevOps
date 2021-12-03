@@ -8,7 +8,8 @@ stages:
     displayName: Build Package
     jobs: 
     - job: BuildPackage
-      pool: AgentPoolUipathAzure
+      pool:
+        vmImage: windows-latest
         
       steps:    
       - task: UiPathPack@2
@@ -25,8 +26,8 @@ stages:
     displayName: Create Assests
     jobs:
       - job: CreateAssests
-        pool: AgentPoolUipathAzure
-          
+        pool:
+          vmImage: windows-latest
         steps:
         - task: UiPathAssets@2
           inputs:
@@ -42,8 +43,8 @@ stages:
     jobs:
       - deployment: deployDEV
         displayName: Deploy package to DEV Orchestrator
-        pool: AgentPoolUipathAzure
-         
+        pool:
+          vmImage: windows-latest
         environment: DEV
         strategy:
          runOnce:
@@ -62,8 +63,8 @@ stages:
     jobs:
         - job: WorkflowAnalyser
           displayName: AnalyseProject Using Workflow Cli
-          pool: AgentPoolUipathAzure
-            
+          pool:
+            vmImage: windows-latest
           steps:
           - task: PowerShell@2
             inputs:
@@ -75,14 +76,37 @@ stages:
                 -OutputFilePath '$(Pipeline.Workspace)\drop\Workflow-Analysis.json'
               workingDirectory: $(Build.SourcesDirectory)
             displayName: 'Analyse Project'
+
+  - stage : CodeQuality
+    displayName: Check Code Analysis
+    dependsOn: Build
+    condition: succeeded()
+    jobs:
+      - job : CodeQuality
+        steps:
+          - task: SonarCloudPrepare@1
+            inputs:
+              SonarCloud: 'Sonar'
+              organization: 'rpabotsworld'
+              scannerMode: 'CLI'
+              configMode: 'manual'
+              cliProjectKey: 'rpabotsworld_UiPathAzureDevOpsExample'
+              cliProjectName: 'UiPathAzureDevOpsExample'
+              cliSources: '.'
+          - task: SonarCloudAnalyze@1
+          - task: SonarCloudPublish@1
+            inputs:
+              pollingTimeoutSec: '300'
+
+
   - stage: TestDEV
     displayName:  Test After Publish
     dependsOn: DeployDEV
     condition: succeeded()
     jobs:
       - job: TestDEV
-        pool: AgentPoolUipathAzure
-          
+        pool:
+          vmImage: windows-latest
         steps:
           - task: UiPathTest@2
             inputs:
