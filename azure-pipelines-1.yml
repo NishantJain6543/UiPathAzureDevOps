@@ -1,0 +1,26 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: windows-latest
+
+steps:
+
+- task: UiPathPack@2
+  inputs:
+    versionType: 'AutoVersion'
+    projectJsonPath: '$(Build.SourcesDirectory)'
+    outputType: 'Process'
+    orchestratorConnection: 'Orchestrator_External_Application_Connection_New'
+    outputPath: '$(Build.ArtifactStagingDirectory)\Output'
+- task: UiPathTest@2
+  inputs:
+    testTarget: 'TestSet'
+    orchestratorConnection: 'Orchestrator_External_Application_Connection_New'
+    testSet: 'UiPathAzureDevOps_Tests'
+    folderName: 'Shared'
