@@ -10,7 +10,6 @@ pool:
   vmImage: windows-latest
 
 steps:
-
 - task: UiPathPack@2
   inputs:
     versionType: 'AutoVersion'
@@ -22,11 +21,9 @@ steps:
   inputs:
     testTarget: 'TestSet'
     orchestratorConnection: 'Orchestrator_External_Application_Connection_New'
-    testSet: 'UiPathAzureDevOps_Tests'
     folderName: 'Shared'
-
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'Pack_Test_Pipeline'
+    ArtifactName: 'PBA'
     publishLocation: 'Container'
