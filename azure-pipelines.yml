@@ -8,8 +8,7 @@ stages:
     displayName: Build Package
     jobs: 
     - job: BuildPackage
-      pool:
-        vmImage: windows-latest
+      pool: AgentPoolUipathAzure
         
       steps:    
       - task: UiPathPack@2
@@ -26,8 +25,8 @@ stages:
     displayName: Create Assests
     jobs:
       - job: CreateAssests
-        pool:
-          vmImage: windows-latest
+        pool: AgentPoolUipathAzure
+          
         steps:
         - task: UiPathAssets@2
           inputs:
@@ -43,8 +42,8 @@ stages:
     jobs:
       - deployment: deployDEV
         displayName: Deploy package to DEV Orchestrator
-        pool:
-          vmImage: windows-latest
+        pool: AgentPoolUipathAzure
+         
         environment: DEV
         strategy:
          runOnce:
@@ -63,8 +62,8 @@ stages:
     jobs:
         - job: WorkflowAnalyser
           displayName: AnalyseProject Using Workflow Cli
-          pool:
-            vmImage: windows-latest
+          pool: AgentPoolUipathAzure
+            
           steps:
           - task: PowerShell@2
             inputs:
@@ -82,8 +81,8 @@ stages:
     condition: succeeded()
     jobs:
       - job: TestDEV
-        pool:
-          vmImage: windows-latest
+        pool: AgentPoolUipathAzure
+          
         steps:
           - task: UiPathTest@2
             inputs:
