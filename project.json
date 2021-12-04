@@ -12,7 +12,7 @@
   "entitiesStores": [],
   "schemaVersion": "4.0",
   "studioVersion": "20.10.0.0",
-  "projectVersion": "1.0.92237756",
+  "projectVersion": "1.0.92318634",
   "runtimeOptions": {
     "autoDispose": false,
     "isPausable": true,
@@ -43,6 +43,21 @@
         "editingStatus": "Publishable",
         "testCaseId": "0cfc1331-4bce-41dd-be70-6e416508755a",
         "fileName": "TestCase.xaml"
+      },
+      {
+        "editingStatus": "Publishable",
+        "testCaseId": "27248399-11e0-4ca4-bbaf-0aa14915ab89",
+        "fileName": "TestCase - 2.xaml"
+      },
+      {
+        "editingStatus": "Publishable",
+        "testCaseId": "359ff3c0-0a0e-4d67-9934-bdaee995ed28",
+        "fileName": "TestCase - 4.xaml"
+      },
+      {
+        "editingStatus": "Publishable",
+        "testCaseId": "b34f3861-c0a7-4819-bf5c-22a326c75e26",
+        "fileName": "TestCase - 3.xaml"
       }
     ],
     "modernBehavior": false
