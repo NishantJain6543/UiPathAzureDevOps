@@ -13,7 +13,7 @@ steps:
 - task: UiPathPack@2
   inputs:
     versionType: 'AutoVersion'
-    projectJsonPath: '$(Build.SourcesDirectory)'
+    projectJsonPath: '$(Build.SourcesDirectory)\project.json'
     outputType: 'Process'
     orchestratorConnection: 'OrchestratorTokenBasedConnection'
     outputPath: '$(Build.ArtifactStagingDirectory)\Output'
