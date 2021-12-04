@@ -17,11 +17,11 @@ steps:
     outputType: 'Process'
     orchestratorConnection: 'OrchestratorTokenBasedConnection'
     outputPath: '$(Build.ArtifactStagingDirectory)\Output'
-- task: UiPathTest@2
-  inputs:
-    testTarget: 'TestSet'
-    orchestratorConnection: 'OrchestratorTokenBasedConnection'
-    folderName: 'Shared'
+# - task: UiPathTest@2
+#   inputs:
+#     testTarget: 'TestSet'
+#     orchestratorConnection: 'OrchestratorTokenBasedConnection'
+#     folderName: 'Shared'
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
